@@ -3,555 +3,510 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Chhaya Sahu | Professional Biodata</title>
+    <title>Chhaya Sahu | Professional Portfolio</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <!-- Library for PDF generation -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <!-- Animation Library CSS -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
         body {
-            font-family: 'Inter', sans-serif;
-            background-color: #f8fafc;
-        }
-        /* Style for the new vibrant sticky navigation */
-        .sticky-nav {
-            position: sticky;
-            top: 0;
-            z-index: 50;
-            background: linear-gradient(90deg, #4f46e5, #a855f7, #ec4899);
-            padding: 4px; /* Creates the border effect */
-            box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
-        }
-        .nav-inner {
-            background-color: white;
-            border-radius: 4px;
-        }
-        .nav-link {
-            transition: all 0.3s ease;
-            position: relative;
-            padding: 10px 16px;
-            border-radius: 6px;
-            font-weight: 500;
-        }
-        .nav-link:hover {
-            color: white;
-            background-color: #ec4899;
-            transform: translateY(-2px);
-        }
-        .nav-link.active-link {
-            color: white;
-            background: linear-gradient(90deg, #a855f7, #ec4899);
-            box-shadow: 0 2px 10px -1px #ec489980;
+            font-family: 'Poppins', sans-serif;
         }
         
-        /* Updated Headings and Subheadings */
-        h1, h2, h3 {
-            font-weight: 900; /* Bolder */
+        /* --- Moving Gradient Text Animation --- */
+        .animate-gradient-text {
+            background-size: 200% auto;
+            animation: gradientFlow 4s linear infinite;
         }
-        h2 {
-            font-size: 2.75rem; /* Bigger */
-            line-height: 3.25rem;
-            text-decoration: underline;
-            text-decoration-color: #a855f7;
-            text-decoration-thickness: 3px;
-            text-underline-offset: 8px;
-        }
-        h3 {
-            font-size: 2rem; /* Bigger */
-            line-height: 2.5rem;
-            text-decoration: underline;
-            text-decoration-color: #a855f7;
-            text-decoration-thickness: 2px;
-            text-underline-offset: 6px;
-        }
-        h1 {
-            font-size: 5rem;
+        @keyframes gradientFlow {
+            0% { background-position: 0% center; }
+            100% { background-position: 200% center; }
         }
 
-        /* NEW: Expanded highlight color palette */
-        .highlight { font-weight: 700; }
-        .highlight-blue { color: #3b82f6; }
-        .highlight-teal { color: #14b8a6; }
-        .highlight-indigo { color: #6366f1; }
-        .highlight-rose { color: #f43f5e; }
-        .highlight-purple { color: #a855f7; }
-        .highlight-amber { color: #f59e0b; }
-        .highlight-lime { color: #84cc16; }
-        .highlight-cyan { color: #06b6d4; }
-        .highlight-fuchsia { color: #d946ef; }
-        .highlight-emerald { color: #10b981; }
-
-
-        /* Scroll to top button styling */
-        #scrollTopBtn {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            display: none;
-            z-index: 100;
-            background: linear-gradient(45deg, #a855f7, #ec4899);
-            border: none;
-            transition: all 0.3s ease;
-        }
-        #scrollTopBtn:hover {
-            transform: scale(1.1) rotate(5deg);
-            box-shadow: 0 0 20px #ec489980;
-        }
-
-        /* Card hover effect */
-        .interactive-card {
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-        .interactive-card:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
-        }
-        
-        /* Experience Timeline */
-        .timeline-item {
-            position: relative;
-            padding-bottom: 2rem;
-            padding-left: 2.5rem;
-        }
-        .timeline-item:last-child {
-            padding-bottom: 0;
-        }
-        .timeline-item::before {
-            content: '';
+        /* --- Fluid Floating Background Animation --- */
+        .blob {
             position: absolute;
-            left: 0;
-            top: 5px;
-            width: 2px;
-            height: 100%;
-            background-color: #e5e7eb;
+            filter: blur(40px);
+            z-index: -1;
+            opacity: 0.4;
+            animation: floatFluid 12s ease-in-out infinite alternate; 
         }
-        .timeline-dot {
-            position: absolute;
-            left: -0.6rem;
-            top: 5px;
-            width: 1.25rem;
-            height: 1.25rem;
-            border-radius: 9999px;
-            background-color: white;
-            border: 3px solid #a855f7;
-            transition: transform 0.3s ease;
-        }
-        .timeline-item:hover .timeline-dot {
-            transform: scale(1.2);
+        .blob-1 { animation-delay: 0s; }
+        .blob-2 { animation-delay: 6s; }
+
+        @keyframes floatFluid {
+            0% { transform: translate(0, 0) rotate(0deg) scale(1); border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%; }
+            33% { transform: translate(30px, -40px) rotate(5deg) scale(1.05); }
+            66% { transform: translate(-20px, 20px) rotate(-5deg) scale(0.95); }
+            100% { transform: translate(0, 0) rotate(0deg) scale(1); border-radius: 30% 60% 70% 40% / 50% 60% 30% 60%; }
         }
 
-        /* Cover Letter Styling */
-        .cover-letter-content {
-            max-height: 150px;
+        /* --- NEW: Profile Running Animation (Spinning Glow) --- */
+        .profile-glow {
+            position: absolute;
+            inset: -8px;
+            background: conic-gradient(from 0deg, #3b82f6, #a855f7, #3b82f6);
+            border-radius: 50%;
+            animation: spin-glow 4s linear infinite;
+            filter: blur(10px);
+            z-index: -1;
+            opacity: 0.7;
+        }
+        @keyframes spin-glow {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        /* Typing Effect */
+        .typing-container {
+            display: inline-block;
             overflow: hidden;
-            transition: max-height 0.7s ease-in-out;
+            white-space: nowrap;
+            border-right: 3px solid #2563eb; 
+            animation: typing 3.5s steps(40, end), blink-caret .75s step-end infinite;
+            max-width: 100%;
         }
-        .cover-letter-content.expanded {
-            max-height: 1000px; /* Large enough for content */
+        @keyframes typing { from { width: 0 } to { width: 100% } }
+        @keyframes blink-caret { from, to { border-color: transparent } 50% { border-color: #2563eb; } }
+
+        /* --- Premium Card Hover Effects --- */
+        .hover-card-base {
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .hover-card-base:hover {
+            transform: translateY(-7px);
+            box-shadow: 0 15px 35px rgba(37, 99, 235, 0.15); 
+            border-color: #bfdbfe !important; 
         }
 
+        /* Print Specific Styles */
+        @media print {
+            @page { margin: 0.5cm; size: A4; }
+            body { 
+                background: white; 
+                color: black; 
+                font-size: 12px;
+            }
+            .no-print, nav, .blob, #contact, footer, .print-hidden, [data-aos], .profile-glow { 
+                display: none !important; 
+                opacity: 1 !important;
+                transform: none !important;
+                transition: none !important;
+                animation: none !important; 
+            }
+            section, div, h1, h2, h3, p, span {
+                display: block !important;
+                opacity: 1 !important;
+                visibility: visible !important;
+            }
+            .no-print { display: none !important; }
+            .md\:hidden { display: none !important; }
 
-        /* Mobile Menu */
-        .mobile-menu {
-            display: none;
-        }
-
-        /* Reveal on scroll animation */
-        .reveal {
-            opacity: 0;
-            transform: translateY(30px);
-            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
-        }
-        .reveal-active {
-            opacity: 1;
-            transform: translateY(0);
+            section { 
+                padding-top: 10px !important; 
+                padding-bottom: 10px !important; 
+                page-break-inside: avoid;
+            }
+            h1 { font-size: 24px !important; margin-bottom: 5px !important; }
+            h2 { font-size: 18px !important; margin-bottom: 10px !important; padding-bottom: 2px !important; }
+            h3 { font-size: 16px !important; }
+            p, span, div { font-size: 11px !important; }
+            
+            .print-grid-2 {
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+                gap: 1rem;
+            }
+            .print-compact-card {
+                border: 1px solid #ddd;
+                padding: 8px !important;
+                box-shadow: none !important;
+            }
+            
+            .grid { display: grid !important; }
+            .flex { display: flex !important; }
         }
     </style>
 </head>
-<body class="text-gray-800">
+<body class="bg-slate-50 text-slate-800 antialiased relative overflow-x-hidden">
 
-    <!-- Sticky Navigation Bar -->
-    <nav class="sticky-nav">
-        <div class="nav-inner">
-            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <div class="flex items-center justify-between h-20">
-                    <div class="flex-shrink-0">
-                        <a href="#home" class="text-3xl font-extrabold bg-clip-text text-transparent bg-gradient-to-r from-indigo-500 to-purple-500">Chhaya Sahu</a>
-                    </div>
-                    <div class="hidden md:block">
-                        <div class="ml-10 flex items-baseline space-x-2">
-                            <a href="#cover-letter" class="nav-link text-gray-700">Cover Letter</a>
-                            <a href="#about" class="nav-link text-gray-700">About</a>
-                            <a href="#competencies" class="nav-link text-gray-700">Competencies</a>
-                            <a href="#experience" class="nav-link text-gray-700">Experience</a>
-                            <a href="#education" class="nav-link text-gray-700">Education</a>
-                            <a href="#contact" class="nav-link text-gray-700">Contact</a>
-                        </div>
-                    </div>
-                    <div class="md:hidden flex items-center">
-                         <button id="mobile-menu-button" class="inline-flex items-center justify-center p-2 rounded-md text-gray-700 hover:text-white hover:bg-purple-500 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white">
-                            <svg class="h-6 w-6" stroke="currentColor" fill="none" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
-                        </button>
-                    </div>
+    <!-- Decorative Background Elements -->
+    <div class="blob blob-1 bg-purple-300 w-72 h-72 rounded-full top-0 left-0 -translate-x-1/2 -translate-y-1/2 no-print"></div>
+    <div class="blob blob-2 bg-blue-300 w-[30rem] h-[30rem] rounded-full bottom-0 right-0 translate-x-1/3 translate-y-1/3 no-print"></div>
+
+    <!-- Navigation -->
+    <nav class="fixed w-full z-50 bg-white/80 backdrop-blur-md shadow-sm no-print transition-all duration-300" id="navbar">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-14">
+                <div class="flex-shrink-0 flex items-center cursor-pointer" onclick="window.scrollTo(0,0)">
+                    <span class="font-bold text-xl text-blue-600 hover:scale-110 transition-transform duration-300 inline-block">CS</span>
+                </div>
+                <div class="hidden md:flex space-x-6 text-sm">
+                    <a href="#home" class="text-slate-600 hover:text-blue-600 font-medium transition hover:underline underline-offset-4">Home</a>
+                    <a href="#about" class="text-slate-600 hover:text-blue-600 font-medium transition hover:underline underline-offset-4">About</a>
+                    <a href="#experience" class="text-slate-600 hover:text-blue-600 font-medium transition hover:underline underline-offset-4">Experience</a>
+                    <a href="#education" class="text-slate-600 hover:text-blue-600 font-medium transition hover:underline underline-offset-4">Education</a>
+                    <a href="#skills" class="text-slate-600 hover:text-blue-600 font-medium transition hover:underline underline-offset-4">Skills</a>
+                    <a href="#contact" class="text-slate-600 hover:text-blue-600 font-medium transition hover:underline underline-offset-4">Contact</a>
+                </div>
+                <!-- Mobile menu button -->
+                <div class="md:hidden flex items-center">
+                    <button id="mobile-menu-btn" class="text-slate-600 hover:text-blue-600 focus:outline-none transition-transform active:scale-95">
+                        <i class="fas fa-bars text-xl"></i>
+                    </button>
                 </div>
             </div>
         </div>
-        <!-- Mobile menu, show/hide based on menu state. -->
-        <div class="mobile-menu bg-white rounded-b-md shadow-lg" id="mobile-nav">
-            <a href="#cover-letter" class="block nav-link text-gray-700 text-center m-2">Cover Letter</a>
-            <a href="#about" class="block nav-link text-gray-700 text-center m-2">About</a>
-            <a href="#competencies" class="block nav-link text-gray-700 text-center m-2">Competencies</a>
-            <a href="#experience" class="block nav-link text-gray-700 text-center m-2">Experience</a>
-            <a href="#education" class="block nav-link text-gray-700 text-center m-2">Education</a>
-            <a href="#contact" class="block nav-link text-gray-700 text-center m-2">Contact</a>
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white border-t border-gray-100 absolute w-full shadow-lg">
+            <a href="#home" class="block px-4 py-3 text-slate-600 hover:bg-slate-50 hover:text-blue-600 transition">Home</a>
+            <a href="#about" class="block px-4 py-3 text-slate-600 hover:bg-slate-50 hover:text-blue-600 transition">About</a>
+            <a href="#experience" class="block px-4 py-3 text-slate-600 hover:bg-slate-50 hover:text-blue-600 transition">Experience</a>
+            <a href="#education" class="block px-4 py-3 text-slate-600 hover:bg-slate-50 hover:text-blue-600 transition">Education</a>
+            <a href="#skills" class="block px-4 py-3 text-slate-600 hover:bg-slate-50 hover:text-blue-600 transition">Skills</a>
+            <a href="#contact" class="block px-4 py-3 text-slate-600 hover:bg-slate-50 hover:text-blue-600 transition">Contact</a>
         </div>
     </nav>
 
-    <!-- Main Content -->
-    <!-- Added id="resume-content" to this tag for PDF generation -->
-    <main id="resume-content" class="max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:px-8">
-
-        <!-- Hero/Home Section -->
-        <header id="home" data-section="home" class="text-center py-20 bg-white rounded-2xl shadow-lg interactive-card reveal">
-             <div class="w-40 h-40 mx-auto mb-6 rounded-full overflow-hidden shadow-2xl border-4 border-purple-500">
-                <img src="https://placehold.co/300x300/a855f7/ffffff?text=CS" alt="Chhaya Sahu" class="object-cover w-full h-full">
-            </div>
-            <h1 class="text-5xl md:text-7xl font-extrabold text-gray-900 tracking-tight">Chhaya Sahu</h1>
-            <p class="mt-4 text-xl text-gray-600 max-w-3xl mx-auto">
-                A <span class="highlight highlight-purple">Linguistics Specialist</span> with a strategic focus on <span class="highlight highlight-teal">Business Communication</span> and <span class="highlight highlight-indigo">Hospitality Relations</span>.
-            </p>
-            <div class="mt-8">
-                <a href="#" id="download-resume" class="inline-flex items-center justify-center px-8 py-4 border border-transparent text-base font-medium rounded-md text-white bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-700 hover:to-indigo-700 transform hover:scale-105 transition-transform duration-300">
-                    <svg class="w-5 h-5 mr-3" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M3 17a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm3.293-7.707a1 1 0 011.414 0L9 10.586V3a1 1 0 112 0v7.586l1.293-1.293a1 1 0 111.414 1.414l-3 3a1 1 0 01-1.414 0l-3-3a1 1 0 010-1.414z" clip-rule="evenodd" /></svg>
-                    Download Resume
-                </a>
-            </div>
-        </header>
-
-        <!-- Cover Letter Section -->
-        <section id="cover-letter" data-section="cover-letter" class="mt-20 scroll-mt-28 reveal">
-            <div class="bg-white p-8 md:p-12 rounded-2xl shadow-lg interactive-card">
-                <h2 class="text-gray-900 mb-12 text-center">Cover Letter</h2>
-                <div class="prose prose-lg max-w-none text-gray-700 relative">
-                    <div id="cover-letter-wrapper" class="cover-letter-content">
-                        <p class="mb-4">To The Hiring Manager,</p>
-                        <p class="mb-4">
-                            I am writing to express my keen interest in a position where I can leverage my unique combination of a Master's degree in <strong class="highlight highlight-purple">Linguistics</strong> and practical experience in business environments. My academic background has provided me with a deep, <span class="highlight highlight-cyan">nuanced understanding</span> of how language shapes <strong class="highlight highlight-teal">effective communication</strong>, customer relations, and overall business strategy. I am confident that my ability to <span class="highlight highlight-amber">bridge cultural and linguistic gaps</span> can significantly enhance communication strategies and elevate customer experiences within a dynamic organization like yours.
-                        </p>
-                        <p class="mb-4">
-                            My experience in data management with tools like <strong class="highlight highlight-indigo">Tally and MS Excel</strong> at ICICI, combined with my client-facing role involving lead generation at Maa Sharda Music Classes, has equipped me with a <span class="highlight highlight-lime">versatile skill set</span>. I am adept at both the <span class="highlight highlight-fuchsia">analytical and interpersonal aspects</span> of business operations. My project work on <strong class="highlight highlight-rose">"How communication builds business"</strong> further solidifies my expertise in applying linguistic principles to real-world business challenges.
-                        </p>
-                        <p>
-                            I am eager to contribute my <span class="highlight highlight-purple">passion for language</span>, analytical skills, and goal-oriented mindset to your team. I am a <span class="highlight highlight-emerald">dedicated professional</span> who is committed to driving success through clear, persuasive, and culturally-aware communication.
-                        </p>
-                        <p class="mt-6 font-semibold">Sincerely,<br>Chhaya Sahu</p>
+    <!-- Hero Section -->
+    <section id="home" class="pt-24 pb-8 px-4 md:pt-32 min-h-[80vh] flex items-center relative">
+        <div class="max-w-6xl mx-auto flex flex-col-reverse md:flex-row items-center gap-6 md:gap-12 relative z-10">
+            <div class="md:w-2/3 text-center md:text-left" data-aos="fade-right" data-aos-duration="1000">
+                <div class="flex flex-col justify-between items-start">
+                    <div class="mb-2">
+                        <span class="text-blue-600 font-bold tracking-wide uppercase text-xs mb-1 block typing-container">Linguist & Business Administrator</span>
                     </div>
-                    <div class="text-center mt-6">
-                         <button id="read-more-btn" class="font-bold text-indigo-600 hover:text-indigo-800 transition-colors duration-300">Read More</button>
+                    <div>
+                        <h1 class="text-3xl md:text-5xl font-bold text-slate-900 mb-3 leading-tight">
+                            Hi, I'm <span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 via-purple-500 to-blue-600 animate-gradient-text">Chhaya Sahu</span>
+                        </h1>
+                        <p class="text-sm md:text-base text-slate-600 mb-6 leading-relaxed max-w-2xl" data-aos="fade-up" data-aos-delay="200">
+                            I bring a unique blend of linguistic expertise and a specialized focus on business and hospitality. I bridge cultural and linguistic gaps to enhance communication strategies and customer experiences.
+                        </p>
+                         <p class="text-sm text-slate-500 mb-6 font-medium flex flex-wrap justify-center md:justify-start gap-4" data-aos="fade-up" data-aos-delay="300">
+                            <span class="flex items-center group transition-all duration-300 hover:text-blue-600"><i class="fas fa-map-marker-alt mr-2 text-red-500 group-hover:animate-bounce"></i>Raipur</span> 
+                            <span class="flex items-center group transition-all duration-300 hover:text-blue-600"><i class="fas fa-phone mr-2 text-green-500 group-hover:animate-bounce"></i>8815526184</span> 
+                            <span class="flex items-center group transition-all duration-300 hover:text-blue-600"><i class="fas fa-envelope mr-2 text-purple-500 group-hover:animate-bounce"></i>chhayasa19@gmail.com</span>
+                        </p>
+                    </div>
+                </div>
+               
+                <div class="flex flex-col sm:flex-row gap-3 justify-center md:justify-start no-print" data-aos="fade-up" data-aos-delay="400">
+                    <a href="#contact" class="px-8 py-3 bg-blue-600 text-white rounded-full text-base font-medium hover:bg-blue-700 transition-all duration-300 shadow-lg hover:shadow-blue-500/40 transform hover:-translate-y-1 active:scale-95">
+                        Contact Me
+                    </a>
+                    <!-- PRINT FUNCTION BUTTON REMOVED AS PER REQUEST -->
+                </div>
+            </div>
+            
+            <!-- Profile Image Section with Running Animation -->
+            <div class="md:w-1/3 flex justify-center no-print" data-aos="zoom-in" data-aos-duration="1000">
+                <!-- Wrapper for the profile and its animations -->
+                <div class="relative w-40 h-40 md:w-56 md:h-56 group cursor-pointer">
+                    
+                    <!-- NEW: Running Animation Background (Spinning Glow) -->
+                    <div class="profile-glow"></div>
+                    
+                    <!-- Inner Container with Border -->
+                    <div class="relative w-full h-full bg-white rounded-full flex items-center justify-center overflow-hidden ring-4 ring-white shadow-xl transition-all duration-500 hover:scale-105">
+                         <!-- 
+                            GITHUB/LOCAL SETUP:
+                            This looks for "chhaya.jpg" in the same folder as this index.html file.
+                            Ensure your file is named exactly "chhaya.jpg".
+                         -->
+                         <img src="chhaya.jpg" alt="Chhaya Sahu" class="w-full h-full object-cover transition duration-700 group-hover:rotate-2" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+                         
+                         <!-- Fallback: Shows "CS" if image is missing -->
+                         <span class="text-6xl font-bold text-blue-200 hidden group-hover:text-blue-500 transition duration-500">CS</span>
                     </div>
                 </div>
             </div>
-        </section>
+        </div>
+    </section>
 
-        <!-- About/Objective Section -->
-        <section id="about" data-section="about" class="mt-20 scroll-mt-28 reveal">
-             <div class="bg-white p-8 md:p-12 rounded-2xl shadow-lg interactive-card">
-                <h2 class="text-gray-900 mb-8 text-center">Professional Objective</h2>
-                <p class="text-center text-xl text-gray-600 max-w-4xl mx-auto leading-relaxed">
-                    I bring a unique blend of <span class="highlight highlight-purple">linguistic expertise</span> and a specialized focus on business and hospitality, bringing a <span class="highlight highlight-cyan">nuanced understanding</span> of how language shapes <span class="highlight highlight-teal">effective communication</span> and <span class="highlight highlight-indigo">customer relations</span>. My goal is to leverage this unique skill set to <span class="highlight highlight-amber">bridge cultural and linguistic gaps</span>, thereby <span class="highlight highlight-emerald">enhancing communication strategies</span> and <span class="highlight highlight-rose">elevating customer experiences</span> within dynamic, forward-thinking industries.
-                </p>
-            </div>
-        </section>
+    <!-- Split Layout for Experience & Education to save space -->
+    <div class="max-w-6xl mx-auto px-4 print-grid-2">
         
-        <!-- Core Competencies Section -->
-        <section id="competencies" data-section="competencies" class="mt-20 scroll-mt-28 reveal">
-            <div class="bg-white p-8 md:p-12 rounded-2xl shadow-lg interactive-card">
-                <h2 class="text-gray-900 mb-12 text-center">Core Competencies</h2>
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                    <div class="bg-gray-50 p-6 rounded-xl interactive-card"><h3 class="text-xl font-bold mb-3 text-indigo-600">Strategic Communication</h3><p class="text-gray-600">Applying linguistic principles to craft clear, persuasive, and culturally-sensitive messaging that <span class="highlight highlight-indigo">resonates with diverse audiences</span> and <span class="highlight highlight-amber">achieves business objectives</span>.</p></div>
-                    <div class="bg-gray-50 p-6 rounded-xl interactive-card"><h3 class="text-xl font-bold mb-3 text-teal-600">Data Analysis & Reporting</h3><p class="text-gray-600">Utilizing tools like MS Excel and Tally for precise data entry and analysis, transforming raw data into <span class="highlight highlight-teal">actionable insights</span> for <span class="highlight highlight-lime">informed decision-making</span>.</p></div>
-                    <div class="bg-gray-50 p-6 rounded-xl interactive-card"><h3 class="text-xl font-bold mb-3 text-rose-600">Client & Customer Relations</h3><p class="text-gray-600">Building strong rapport through effective lead generation, active listening, and empathetic engagement to foster <span class="highlight highlight-rose">positive and long-lasting</span> business relationships.</p></div>
-                    <div class="bg-gray-50 p-6 rounded-xl interactive-card"><h3 class="text-xl font-bold mb-3 text-blue-600">Multilingual Proficiency</h3><p class="text-gray-600">Facilitating seamless communication across linguistic barriers in English, Hindi, Spanish, and Chhattisgarhi to <span class="highlight highlight-blue">expand market reach</span> and enhance inclusivity.</p></div>
-                    <div class="bg-gray-50 p-6 rounded-xl interactive-card"><h3 class="text-xl font-bold mb-3 text-purple-600">Project & Event Management</h3><p class="text-gray-600">Employing a goal-oriented approach to plan, coordinate, and execute projects and events efficiently, ensuring all <span class="highlight highlight-purple">milestones are met on time</span> and within scope.</p></div>
-                    <div class="bg-gray-50 p-6 rounded-xl interactive-card"><h3 class="text-xl font-bold mb-3 text-fuchsia-500">Content Creation & Editing</h3><p class="text-gray-600">Developing and refining <span class="highlight highlight-fuchsia">high-quality written content</span> that is clear, accurate, and engaging, supported by a formal certification in content writing.</p></div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Why Me Section -->
-        <section id="why-me" class="mt-20 scroll-mt-28 reveal">
-            <div class="bg-gradient-to-br from-purple-600 via-indigo-600 to-rose-500 text-white p-8 md:p-12 rounded-2xl shadow-lg interactive-card">
-                <h2 class="text-white mb-8 text-center">My Unique Value</h2>
-                <p class="text-center text-xl text-indigo-100 max-w-4xl mx-auto leading-relaxed">
-                    In today's globalized market, communication is more than just words—it's about <span class="highlight-amber">connection, understanding, and strategy</span>. I offer a rare and powerful combination: the <strong class="text-yellow-300">analytical mind of a linguist</strong> with the <strong class="text-yellow-300">pragmatic skills of a business professional</strong>. While others see language as a tool, I see it as a system that can be <span class="highlight-lime">optimized for business success</span>. I don't just communicate; I <span class="highlight-cyan">analyze, adapt, and strategize</span> to ensure every interaction is impactful. This unique perspective allows me to solve <span class="highlight-fuchsia">complex communication challenges</span>, build stronger client relationships, and contribute to a more cohesive and effective organizational culture.
-                </p>
-            </div>
-        </section>
-
         <!-- Experience Section -->
-        <section id="experience" data-section="experience" class="mt-20 scroll-mt-28 reveal">
-            <div class="bg-white p-8 md:p-12 rounded-2xl shadow-lg interactive-card">
-                <h2 class="text-gray-900 mb-16 text-center">Professional Experience</h2>
-                <div>
-                    <div class="timeline-item">
-                        <div class="timeline-dot"></div>
-                        <div class="mb-2 text-gray-500 font-semibold">Oct 2023 - Jan 2024</div>
-                        <h3 class="text-2xl font-bold text-gray-800 mb-2">Data Entry Back Office at <span class="highlight-amber">ICICI Bank</span></h3>
-                        <p class="text-gray-600 leading-relaxed">
-                            Oversaw the precise and efficient management of <span class="highlight highlight-blue">critical financial data</span>, leveraging <span class="highlight highlight-indigo">Tally</span> and <span class="highlight highlight-emerald">MS Excel</span> to ensure <span class="highlight highlight-lime">100% data integrity</span>. My role was instrumental in supporting core banking operations by streamlining administrative workflows and providing accurate data for reporting, which contributed to <span class="highlight highlight-teal">improved operational efficiency</span>.
-                        </p>
+        <section id="experience" class="py-8 bg-white rounded-xl mb-4 md:mb-0 transition-colors">
+            <h2 class="text-xl md:text-2xl font-bold mb-6 text-slate-900 border-b pb-2 border-slate-200" data-aos="fade-right">
+                <i class="fas fa-briefcase text-blue-500 mr-2 text-lg"></i>Work Experience
+            </h2>
+            
+            <div class="space-y-4 border-l-2 border-slate-200 ml-3 pl-5">
+                
+                <!-- Item 1 -->
+                <div class="relative group" data-aos="fade-left" data-aos-delay="100">
+                    <div class="absolute -left-[29px] top-1 w-4 h-4 rounded-full bg-blue-500 border-2 border-white group-hover:scale-150 transition-transform duration-300 shadow-sm"></div>
+                    <div class="bg-slate-50 p-4 rounded-lg border border-slate-100 print-compact-card hover-card-base">
+                        <div class="flex justify-between items-start">
+                            <h3 class="font-bold text-base text-slate-800">ICICI</h3>
+                            <span class="text-[10px] font-bold text-blue-600 bg-blue-50 px-2 py-0.5 rounded">Oct 2023 - Jan 2024</span>
+                        </div>
+                        <h4 class="text-sm text-slate-600 font-medium mb-1">Data Entry Back Office</h4>
+                        <p class="text-xs text-slate-500">Handled back-office data entry operations utilizing Tally and MS Excel, ensuring accuracy and efficiency in data management.</p>
                     </div>
-                    <div class="timeline-item">
-                        <div class="timeline-dot"></div>
-                        <div class="mb-2 text-gray-500 font-semibold">May 2018 - Aug 2018</div>
-                        <h3 class="text-2xl font-bold text-gray-800 mb-2">Receptionist at <span class="highlight-rose">Maa Sharda Music Classes</span></h3>
-                        <p class="text-gray-600 leading-relaxed">
-                            Served as the <span class="highlight highlight-purple">primary brand ambassador</span>, managing all front-desk activities and communications. I successfully implemented a new lead tracking system that resulted in a <span class="highlight highlight-rose">15% increase in student inquiries</span>. My professional and welcoming approach was key to converting prospects and fostering a <span class="highlight highlight-fuchsia">positive community atmosphere</span>.
-                        </p>
+                </div>
+
+                <!-- Item 2 -->
+                <div class="relative group" data-aos="fade-left" data-aos-delay="200">
+                    <div class="absolute -left-[29px] top-1 w-4 h-4 rounded-full bg-purple-500 border-2 border-white group-hover:scale-150 transition-transform duration-300 shadow-sm"></div>
+                    <div class="bg-slate-50 p-4 rounded-lg border border-slate-100 print-compact-card hover-card-base">
+                        <div class="flex justify-between items-start">
+                            <h3 class="font-bold text-base text-slate-800">Maa Sharda Music Classes</h3>
+                            <span class="text-[10px] font-bold text-purple-600 bg-purple-50 px-2 py-0.5 rounded">May 2018 - Aug 2018</span>
+                        </div>
+                        <h4 class="text-sm text-slate-600 font-medium mb-1">Receptionist</h4>
+                        <p class="text-xs text-slate-500">Managed front desk operations, including generating leads and attending calls to facilitate enrollment.</p>
                     </div>
                 </div>
             </div>
         </section>
 
         <!-- Education Section -->
-        <section id="education" data-section="education" class="mt-20 scroll-mt-28 reveal">
-            <div class="bg-white p-8 md:p-12 rounded-2xl shadow-lg interactive-card">
-                <h2 class="text-gray-900 mb-12 text-center">Education & Certifications</h2>
-                <div class="overflow-x-auto">
-                    <table class="w-full text-left border-collapse">
-                        <thead class="bg-gradient-to-r from-purple-500 to-indigo-500 text-white">
-                            <tr>
-                                <th class="p-4 text-lg font-semibold rounded-tl-lg">Degree / Certification</th>
-                                <th class="p-4 text-lg font-semibold">Institution</th>
-                                <th class="p-4 text-lg font-semibold">Year</th>
-                                <th class="p-4 text-lg font-semibold rounded-tr-lg">Score</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr class="border-b border-gray-200 hover:bg-gray-100"><td class="p-4 font-medium highlight-purple">MA in Linguistics</td><td class="p-4 text-gray-600">P.R.S.U</td><td class="p-4 text-gray-600">2024</td><td class="p-4 text-gray-600 font-bold">70%</td></tr>
-                            <tr class="border-b border-gray-200 hover:bg-gray-100"><td class="p-4 font-medium highlight-indigo">PGDCA</td><td class="p-4 text-gray-600">IISDT</td><td class="p-4 text-gray-600">2024</td><td class="p-4 text-gray-600 font-bold">8.6 CGPA</td></tr>
-                            <tr class="border-b border-gray-200 hover:bg-gray-100"><td class="p-4 font-medium highlight-teal">BA in English Literature</td><td class="p-4 text-gray-600">Sage University</td><td class="p-4 text-gray-600">2023</td><td class="p-4 text-gray-600 font-bold">7.1 CGPA</td></tr>
-                            <tr class="hover:bg-gray-100"><td class="p-4 font-medium highlight-rose">Content Writing Masterclass</td><td class="p-4 text-gray-600">Udemy</td><td class="p-4 text-gray-600">2020</td><td class="p-4 text-gray-600 font-bold">Certified</td></tr>
-                        </tbody>
-                    </table>
+        <section id="education" class="py-8 bg-slate-50 rounded-xl" data-aos="fade-up">
+            <h2 class="text-xl md:text-2xl font-bold mb-6 text-slate-900 border-b pb-2 border-slate-200">
+                <i class="fas fa-graduation-cap text-purple-500 mr-2 text-lg"></i>Education
+            </h2>
+            
+            <div class="grid grid-cols-1 gap-3">
+                <!-- Edu Card 1 -->
+                <div class="bg-white p-3 rounded-lg shadow-sm border-l-4 border-blue-500 print-compact-card flex justify-between items-center hover-card-base" data-aos="flip-up" data-aos-delay="100">
+                    <div>
+                        <h3 class="font-bold text-sm text-slate-800">PGDCA</h3>
+                        <p class="text-xs text-slate-500">IISDT</p>
+                    </div>
+                    <div class="text-right">
+                        <span class="block text-[10px] bg-slate-100 px-1 rounded">2024</span>
+                        <span class="text-xs font-semibold text-green-600">8.6 CGPA</span>
+                    </div>
+                </div>
+
+                <!-- Edu Card 2 -->
+                <div class="bg-white p-3 rounded-lg shadow-sm border-l-4 border-purple-500 print-compact-card flex justify-between items-center hover-card-base" data-aos="flip-up" data-aos-delay="200">
+                    <div>
+                        <h3 class="font-bold text-sm text-slate-800">MA Linguistics</h3>
+                        <p class="text-xs text-slate-500">P.R.S.U</p>
+                    </div>
+                    <div class="text-right">
+                        <span class="block text-[10px] bg-slate-100 px-1 rounded">2024</span>
+                        <span class="text-xs font-semibold text-green-600">70%</span>
+                    </div>
+                </div>
+
+                <!-- Edu Card 3 -->
+                <div class="bg-white p-3 rounded-lg shadow-sm border-l-4 border-pink-500 print-compact-card flex justify-between items-center hover-card-base" data-aos="flip-up" data-aos-delay="300">
+                    <div>
+                        <h3 class="font-bold text-sm text-slate-800">BA English Lit.</h3>
+                        <p class="text-xs text-slate-500">Sage University</p>
+                    </div>
+                    <div class="text-right">
+                        <span class="block text-[10px] bg-slate-100 px-1 rounded">2023</span>
+                        <span class="text-xs font-semibold text-green-600">7.1 CGPA</span>
+                    </div>
+                </div>
+
+                 <!-- Edu Card 4 -->
+                 <div class="bg-white p-3 rounded-lg shadow-sm border-l-4 border-orange-500 print-compact-card flex justify-between items-center hover-card-base" data-aos="flip-up" data-aos-delay="400">
+                    <div>
+                        <h3 class="font-bold text-sm text-slate-800">12th Grade</h3>
+                        <p class="text-xs text-slate-500">NIOS</p>
+                    </div>
+                    <div class="text-right">
+                        <span class="block text-[10px] bg-slate-100 px-1 rounded">2019</span>
+                        <span class="text-xs font-semibold text-green-600">6.7 CGPA</span>
+                    </div>
+                </div>
+
+                <!-- Edu Card 5 -->
+                <div class="bg-white p-3 rounded-lg shadow-sm border-l-4 border-yellow-500 print-compact-card flex justify-between items-center hover-card-base" data-aos="flip-up" data-aos-delay="500">
+                    <div>
+                        <h3 class="font-bold text-sm text-slate-800">10th Grade</h3>
+                        <p class="text-xs text-slate-500">Kendriya Vidyalaya</p>
+                    </div>
+                    <div class="text-right">
+                        <span class="block text-[10px] bg-slate-100 px-1 rounded">2017</span>
+                        <span class="text-xs font-semibold text-green-600">7.4 CGPA</span>
+                    </div>
                 </div>
             </div>
         </section>
+    </div>
+
+    <!-- Skills & Languages Section -->
+    <section id="skills" class="py-8 bg-white">
+        <div class="max-w-6xl mx-auto px-4">
+            <div class="grid md:grid-cols-2 gap-8">
+                <!-- Skills -->
+                <div data-aos="fade-right">
+                    <h3 class="text-xl font-bold mb-4 text-slate-900 flex items-center gap-2 border-b pb-2 border-slate-200">
+                        <i class="fas fa-layer-group text-blue-600 animate-pulse"></i> Professional Skills
+                    </h3>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="px-3 py-1 bg-slate-100 text-slate-700 rounded text-xs font-medium border border-slate-200 hover:bg-blue-50 hover:text-blue-600 hover:border-blue-200 transition-all cursor-default transform hover:scale-105 duration-300 hover:shadow-sm">Effective Communication</span>
+                        <span class="px-3 py-1 bg-slate-100 text-slate-700 rounded text-xs font-medium border border-slate-200 hover:bg-blue-50 hover:text-blue-600 hover:border-blue-200 transition-all cursor-default transform hover:scale-105 duration-300 hover:shadow-sm">Logical Reasoning</span>
+                        <span class="px-3 py-1 bg-slate-100 text-slate-700 rounded text-xs font-medium border border-slate-200 hover:bg-blue-50 hover:text-blue-600 hover:border-blue-200 transition-all cursor-default transform hover:scale-105 duration-300 hover:shadow-sm">Goal Oriented</span>
+                        <span class="px-3 py-1 bg-slate-100 text-slate-700 rounded text-xs font-medium border border-slate-200 hover:bg-blue-50 hover:text-blue-600 hover:border-blue-200 transition-all cursor-default transform hover:scale-105 duration-300 hover:shadow-sm">Writing & Editing</span>
+                        <span class="px-3 py-1 bg-slate-100 text-slate-700 rounded text-xs font-medium border border-slate-200 hover:bg-blue-50 hover:text-blue-600 hover:border-blue-200 transition-all cursor-default transform hover:scale-105 duration-300 hover:shadow-sm">Data Analysis</span>
+                        <span class="px-3 py-1 bg-slate-100 text-slate-700 rounded text-xs font-medium border border-slate-200 hover:bg-blue-50 hover:text-blue-600 hover:border-blue-200 transition-all cursor-default transform hover:scale-105 duration-300 hover:shadow-sm">Business Admin</span>
+                        <span class="px-3 py-1 bg-slate-100 text-slate-700 rounded text-xs font-medium border border-slate-200 hover:bg-blue-50 hover:text-blue-600 hover:border-blue-200 transition-all cursor-default transform hover:scale-105 duration-300 hover:shadow-sm">Event Planning</span>
+                    </div>
+
+                    <h3 class="text-xl font-bold mt-6 mb-3 text-slate-900 flex items-center gap-2 border-b pb-2 border-slate-200" data-aos="fade-up">
+                        <i class="fas fa-lightbulb text-yellow-500 animate-bounce"></i> Projects & Interests
+                    </h3>
+                    <ul class="space-y-2 text-sm">
+                        <li class="flex items-start gap-2 hover:translate-x-2 transition-transform duration-300" data-aos="fade-up" data-aos-delay="100">
+                            <i class="fas fa-check-circle text-green-500 mt-1 text-xs"></i>
+                            <span class="text-slate-600"><strong>Project:</strong> How communication builds business</span>
+                        </li>
+                        <li class="flex items-start gap-2 hover:translate-x-2 transition-transform duration-300" data-aos="fade-up" data-aos-delay="200">
+                            <i class="fas fa-check-circle text-green-500 mt-1 text-xs"></i>
+                            <span class="text-slate-600"><strong>Project:</strong> Psychology behind human behaviour</span>
+                        </li>
+                        <li class="flex items-start gap-2 hover:translate-x-2 transition-transform duration-300" data-aos="fade-up" data-aos-delay="300">
+                            <i class="fas fa-heart text-red-500 mt-1 text-xs"></i>
+                            <span class="text-slate-600"><strong>Interests:</strong> Reading, Writing, Traveling, Cooking, Editing</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Languages & Certs -->
+                <div data-aos="fade-left">
+                    <h3 class="text-xl font-bold mb-4 text-slate-900 flex items-center gap-2 border-b pb-2 border-slate-200">
+                        <i class="fas fa-language text-purple-600 animate-pulse"></i> Languages
+                    </h3>
+                    <div class="grid grid-cols-2 gap-4">
+                        <div class="bg-slate-50 p-2 rounded border border-slate-100 hover:shadow-md transition-all duration-300 hover:bg-white hover:border-blue-200" data-aos="zoom-in" data-aos-delay="100">
+                            <div class="flex justify-between items-center mb-1">
+                                <span class="text-sm font-medium text-slate-700">English</span>
+                                <span class="text-xs text-slate-500">Professional</span>
+                            </div>
+                            <div class="w-full bg-slate-200 rounded-full h-1.5 overflow-hidden">
+                                <div class="bg-blue-600 h-1.5 rounded-full transition-all duration-1000 ease-out" style="width: 0%" data-aos="slide-right" data-aos-delay="500" data-aos-offset="10"></div>
+                            </div>
+                            <script>setTimeout(() => document.querySelectorAll('[data-aos="slide-right"]').forEach(el => el.style.width = el.parentElement.nextElementSibling ? '0%' : '90%'), 100)</script>
+                            <!-- Simple width fix for AOS conflict -->
+                            <div class="w-full bg-slate-200 rounded-full h-1.5 mt-1 overflow-hidden">
+                                <div class="bg-blue-600 h-1.5 rounded-full transition-all duration-1000 ease-out" style="width: 90%"></div>
+                            </div>
+                        </div>
+                        <div class="bg-slate-50 p-2 rounded border border-slate-100 hover:shadow-md transition-all duration-300 hover:bg-white hover:border-orange-200" data-aos="zoom-in" data-aos-delay="200">
+                            <div class="flex justify-between items-center mb-1">
+                                <span class="text-sm font-medium text-slate-700">Hindi</span>
+                                <span class="text-xs text-slate-500">Native</span>
+                            </div>
+                            <div class="w-full bg-slate-200 rounded-full h-1.5 mt-1 overflow-hidden">
+                                <div class="bg-orange-500 h-1.5 rounded-full transition-all duration-1000 ease-out" style="width: 100%"></div>
+                            </div>
+                        </div>
+                         <div class="bg-slate-50 p-2 rounded border border-slate-100 hover:shadow-md transition-all duration-300 hover:bg-white hover:border-green-200" data-aos="zoom-in" data-aos-delay="300">
+                            <div class="flex justify-between items-center mb-1">
+                                <span class="text-sm font-medium text-slate-700">Chhattisgarhi</span>
+                                <span class="text-xs text-slate-500">Native</span>
+                            </div>
+                            <div class="w-full bg-slate-200 rounded-full h-1.5 mt-1 overflow-hidden">
+                                <div class="bg-green-500 h-1.5 rounded-full transition-all duration-1000 ease-out" style="width: 95%"></div>
+                            </div>
+                        </div>
+                        <div class="bg-slate-50 p-2 rounded border border-slate-100 hover:shadow-md transition-all duration-300 hover:bg-white hover:border-yellow-200" data-aos="zoom-in" data-aos-delay="400">
+                            <div class="flex justify-between items-center mb-1">
+                                <span class="text-sm font-medium text-slate-700">Spanish</span>
+                                <span class="text-xs text-slate-500">Intermediate</span>
+                            </div>
+                            <div class="w-full bg-slate-200 rounded-full h-1.5 mt-1 overflow-hidden">
+                                <div class="bg-yellow-500 h-1.5 rounded-full transition-all duration-1000 ease-out" style="width: 60%"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <h3 class="text-xl font-bold mt-6 mb-3 text-slate-900 flex items-center gap-2 border-b pb-2 border-slate-200" data-aos="fade-up">
+                        <i class="fas fa-certificate text-orange-500"></i> Certifications
+                    </h3>
+                    <div class="bg-white border border-slate-200 rounded-lg p-3 flex gap-3 items-center shadow-sm hover:shadow-lg transition-all duration-300 hover:border-orange-300 transform hover:-translate-y-1" data-aos="flip-up" data-aos-delay="200">
+                        <div class="bg-orange-100 text-orange-600 w-10 h-10 flex items-center justify-center rounded-full shrink-0 text-sm animate-pulse">
+                            <i class="fas fa-award"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-sm text-slate-800">Content Writing Masterclass</h4>
+                            <p class="text-xs text-slate-500">Udemy | 2020</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section (Hidden on Print) -->
+    <section id="contact" class="py-12 bg-slate-900 text-white no-print relative overflow-hidden">
+        <!-- Subtle animated background for contact -->
+        <div class="absolute inset-0 opacity-10 bg-[radial-gradient(circle_at_50%_50%,_#4f46e5,_transparent_70%)] animate-pulse"></div>
         
-        <!-- Skills & Languages Section -->
-        <section id="skills-languages" data-section="skills" class="mt-20 scroll-mt-28 reveal">
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
-                 <!-- Skills Proficiency -->
-                <div class="bg-white p-8 rounded-2xl shadow-lg interactive-card">
-                    <h2 class="text-3xl text-gray-900 mb-8 text-center">Skills Proficiency</h2>
-                    <canvas id="skillsChart"></canvas>
-                </div>
-                <!-- Language Fluency -->
-                <div class="bg-white p-8 rounded-2xl shadow-lg interactive-card">
-                    <h2 class="text-3xl text-gray-900 mb-8 text-center">Language Fluency</h2>
-                     <canvas id="languagesChart"></canvas>
-                </div>
-            </div>
-        </section>
-
-        <!-- Projects Section -->
-        <section id="projects" class="mt-20 scroll-mt-28 reveal">
-             <div class="bg-white p-8 md:p-12 rounded-2xl shadow-lg interactive-card">
-                 <h2 class="text-3xl text-gray-900 mb-12 text-center">Key Projects</h2>
-                 <ul class="space-y-12">
-                    <li>
-                        <h3 class="text-2xl font-bold text-gray-800 mb-2">How Communication Builds Business</h3>
-                        <p class="text-gray-600 leading-relaxed">This research project conducted a <span class="highlight highlight-indigo">deep-dive analysis</span> into the communication strategies of several high-growth startups. The study identified a direct correlation between sophisticated <span class="highlight highlight-teal">internal and external communication frameworks</span> and <span class="highlight highlight-lime">sustained revenue growth</span>. The key outcome was a model for SMBs to <span class="highlight highlight-amber">optimize their communication</span> for better market penetration and employee retention.</p>
-                    </li>
-                    <li class="border-t border-gray-200 pt-12">
-                        <h3 class="text-2xl font-bold text-gray-800 mb-2">The Psychology of Human Behaviour</h3>
-                        <p class="text-gray-600 leading-relaxed">An analytical study exploring the core psychological drivers that influence <span class="highlight highlight-purple">consumer decision-making</span> and workplace dynamics. The project delivered a set of <span class="highlight highlight-cyan">actionable insights and recommendations</span> for developing more effective marketing campaigns and human resource strategies, focusing on cognitive biases and motivational theories.</p>
-                    </li>
-                 </ul>
-            </div>
-        </section>
-        
-        <!-- Interests Section -->
-        <section id="interests" class="mt-20 scroll-mt-28 reveal">
-            <div class="bg-white p-8 md:p-12 rounded-2xl shadow-lg interactive-card">
-                <h2 class="text-gray-900 mb-12 text-center">Personal Interests</h2>
-                <div class="flex flex-wrap justify-center items-center gap-8 text-gray-600">
-                    <div class="text-center transition-transform hover:scale-110"><svg class="w-16 h-16 mx-auto text-purple-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 6.253v11.494m-5.74-7.89l11.48 0M4.938 12h14.124M18.062 17.747L5.938 6.253" /></svg><p class="mt-2 font-semibold">Reading</p></div>
-                     <div class="text-center transition-transform hover:scale-110"><svg class="w-16 h-16 mx-auto text-rose-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" /></svg><p class="mt-2 font-semibold">Writing</p></div>
-                     <div class="text-center transition-transform hover:scale-110"><svg class="w-16 h-16 mx-auto text-teal-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8" /></svg><p class="mt-2 font-semibold">Traveling</p></div>
-                     <div class="text-center transition-transform hover:scale-110"><svg class="w-16 h-16 mx-auto text-indigo-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" /></svg><p class="mt-2 font-semibold">Cooking</p></div>
-                     <div class="text-center transition-transform hover:scale-110"><svg class="w-16 h-16 mx-auto text-blue-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z" /></svg><p class="mt-2 font-semibold">Editing</p></div>
+        <div class="max-w-4xl mx-auto px-4 text-center relative z-10">
+            <h2 class="text-2xl font-bold mb-6" data-aos="fade-down">Get In Touch</h2>
+            <div class="grid md:grid-cols-3 gap-6">
+                <a href="tel:8815526184" class="p-4 bg-slate-800 rounded-xl hover:bg-slate-700 transition-all duration-300 group hover:scale-105 hover:shadow-lg hover:shadow-blue-900/30" data-aos="zoom-in" data-aos-delay="100">
+                    <i class="fas fa-phone text-blue-400 text-xl mb-2 block group-hover:animate-bounce"></i>
+                    <p class="text-slate-300 text-sm">8815526184</p>
+                </a>
+                <a href="mailto:chhayasa19@gmail.com" class="p-4 bg-slate-800 rounded-xl hover:bg-slate-700 transition-all duration-300 group hover:scale-105 hover:shadow-lg hover:shadow-purple-900/30" data-aos="zoom-in" data-aos-delay="200">
+                    <i class="fas fa-envelope text-purple-400 text-xl mb-2 block group-hover:animate-bounce"></i>
+                    <p class="text-slate-300 text-sm">chhayasa19@gmail.com</p>
+                </a>
+                <div class="p-4 bg-slate-800 rounded-xl hover:scale-105 transition-all duration-300 hover:shadow-lg hover:shadow-green-900/30 group" data-aos="zoom-in" data-aos-delay="300">
+                    <i class="fas fa-map-marker-alt text-green-400 text-xl mb-2 block group-hover:animate-bounce"></i>
+                    <p class="text-slate-300 text-sm">Raipur, Chhattisgarh</p>
                 </div>
             </div>
-        </section>
+        </div>
+    </section>
 
-        <!-- Contact Section -->
-        <footer id="contact" data-section="contact" class="mt-20 bg-gray-900 text-white rounded-2xl shadow-lg p-8 md:p-12 scroll-mt-28 reveal">
-            <div class="text-center">
-                <h2 class="text-white mb-8">Get In Touch</h2>
-                <p class="text-lg text-gray-300 mb-2">Chhaya Sahu</p>
-                <p class="text-lg text-gray-300 mb-2">QR.no.4 Tikarapara Police station, Raipur, Chhattisgarh</p>
-                <p class="text-lg text-gray-300 mb-4">
-                    <a href="mailto:chhayasa19@gmail.com" class="hover:text-rose-400 transition-colors">chhayasa19@gmail.com</a> | 
-                    <a href="tel:+918815526184" class="hover:text-rose-400 transition-colors">8815526184</a>
-                </p>
-            </div>
-        </footer>
-
-    </main>
+    <!-- Footer (Hidden on Print) -->
+    <footer class="bg-slate-950 py-4 text-center text-slate-500 text-xs no-print">
+        <p>&copy; 2026 Chhaya Sahu. All rights reserved.</p>
+    </footer>
 
     <!-- Scroll to Top Button -->
-    <button id="scrollTopBtn" title="Go to top" class="bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-3 px-3 rounded-full shadow-lg transition-transform transform hover:scale-110">
-        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 15l7-7 7 7" /></svg>
+    <button id="scrollToTop" class="fixed bottom-8 right-8 bg-blue-600 text-white p-3 rounded-full shadow-lg translate-y-20 opacity-0 transition-all duration-300 hover:bg-blue-700 hover:shadow-blue-500/50 hover:-translate-y-1 z-50 no-print" onclick="window.scrollTo({top: 0, behavior: 'smooth'})">
+        <i class="fas fa-arrow-up"></i>
     </button>
-    
+
+    <!-- Animation Script -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            // --- Chart.js Initializations ---
-            const skillsCtx = document.getElementById('skillsChart').getContext('2d');
-            new Chart(skillsCtx, {
-                type: 'bar',
-                data: {
-                    labels: ['Communication', 'Data Analysis', 'Content Creation', 'Business Admin', 'Goal Oriented', 'Event Planning'],
-                    datasets: [{
-                        label: 'Proficiency Level', data: [95, 90, 90, 85, 95, 75],
-                        backgroundColor: ['rgba(236, 72, 153, 0.6)', 'rgba(168, 85, 247, 0.6)', 'rgba(99, 102, 241, 0.6)', 'rgba(20, 184, 166, 0.6)', 'rgba(244, 63, 94, 0.6)', 'rgba(59, 130, 246, 0.6)'],
-                        borderColor: ['rgba(236, 72, 153, 1)', 'rgba(168, 85, 247, 1)', 'rgba(99, 102, 241, 1)', 'rgba(20, 184, 166, 1)', 'rgba(244, 63, 94, 1)', 'rgba(59, 130, 246, 1)'],
-                        borderWidth: 1
-                    }]
-                },
-                options: { indexAxis: 'y', scales: { x: { beginAtZero: true, max: 100 } }, plugins: { legend: { display: false } } }
-            });
+        // Initialize AOS with smoother settings
+        AOS.init({
+            once: true, // Animations happen only once
+            offset: 60, // Trigger sooner
+            duration: 900, // Slower animation speed for professional feel
+            easing: 'cubic-bezier(0.25, 0.46, 0.45, 0.94)', // Smoother custom easing
+        });
 
-            const languagesCtx = document.getElementById('languagesChart').getContext('2d');
-            new Chart(languagesCtx, {
-                type: 'bar',
-                data: {
-                    labels: ['English', 'Hindi', 'Chhattisgarhi', 'Spanish'],
-                    datasets: [{
-                        label: 'Fluency', data: [90, 100, 100, 65],
-                        backgroundColor: ['rgba(79, 70, 229, 0.6)', 'rgba(219, 39, 119, 0.6)', 'rgba(13, 148, 136, 0.6)', 'rgba(217, 70, 239, 0.6)'],
-                        borderColor: ['rgba(79, 70, 229, 1)', 'rgba(219, 39, 119, 1)', 'rgba(13, 148, 136, 1)', 'rgba(217, 70, 239, 1)'],
-                        borderWidth: 1
-                    }]
-                },
-                options: {
-                     scales: { y: { beginAtZero: true, max: 100 } },
-                    plugins: { legend: { display: false }, tooltip: { callbacks: { label: function(c) {
-                        let v = c.parsed.y; if (v > 95) return 'Native'; if (v > 80) return 'Fluent'; return 'Intermediate';
-                    }}}}
-                }
-            });
+        // Mobile menu toggle
+        const btn = document.getElementById('mobile-menu-btn');
+        const menu = document.getElementById('mobile-menu');
 
-            // --- Download Resume Button (UPDATED) ---
-            document.getElementById('download-resume').addEventListener('click', function(e) {
-                e.preventDefault();
+        btn.addEventListener('click', () => {
+            menu.classList.toggle('hidden');
+        });
 
-                // The element that contains the resume content.
-                const element = document.getElementById('resume-content');
-                
-                // Temporarily hide the download button's container so it doesn't appear in the PDF.
-                // Using 'visibility' prevents the layout from shifting.
-                const downloadButtonContainer = this.parentElement;
-                downloadButtonContainer.style.visibility = 'hidden';
-
-                // Options for html2pdf. A4 format is standard for resumes.
-                const opt = {
-                    margin:       0.4,
-                    filename:     'Chhaya_Sahu_Resume.pdf',
-                    image:        { type: 'jpeg', quality: 0.98 },
-                    html2canvas:  { scale: 2, useCORS: true, letterRendering: true },
-                    jsPDF:        { unit: 'in', format: 'a4', orientation: 'portrait' },
-                    pagebreak:    { mode: 'avoid-all' }
-                };
-
-                // Use html2pdf to generate the PDF from the 'resume-content' element and save it.
-                html2pdf().set(opt).from(element).save().then(() => {
-                    // Show the button again once the PDF generation is complete or is cancelled.
-                    downloadButtonContainer.style.visibility = 'visible';
-                }).catch(err => {
-                    console.error("PDF generation failed: ", err);
-                    // Ensure the button is visible again even if there's an error.
-                    downloadButtonContainer.style.visibility = 'visible';
-                });
-            });
-
-
-            // --- Cover Letter Toggle ---
-            const readMoreBtn = document.getElementById('read-more-btn');
-            const coverLetterWrapper = document.getElementById('cover-letter-wrapper');
-            readMoreBtn.addEventListener('click', () => {
-                coverLetterWrapper.classList.toggle('expanded');
-                if (coverLetterWrapper.classList.contains('expanded')) {
-                    readMoreBtn.textContent = 'Read Less';
-                } else {
-                    readMoreBtn.textContent = 'Read More';
-                }
+        // Close menu when clicking a link
+        document.querySelectorAll('#mobile-menu a').forEach(link => {
+            link.addEventListener('click', () => {
+                menu.classList.add('hidden');
             });
         });
 
-        // --- Scroll to Top Button ---
-        const scrollTopBtn = document.getElementById('scrollTopBtn');
-        window.onscroll = () => {
-            if (document.body.scrollTop > 100 || document.documentElement.scrollTop > 100) {
-                scrollTopBtn.style.display = "block";
+        // Scroll to Top Button Visibility
+        const scrollBtn = document.getElementById('scrollToTop');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 300) {
+                scrollBtn.classList.remove('translate-y-20', 'opacity-0');
             } else {
-                scrollTopBtn.style.display = "none";
+                scrollBtn.classList.add('translate-y-20', 'opacity-0');
             }
-        };
-        scrollTopBtn.addEventListener('click', () => { window.scrollTo({top: 0, behavior: 'smooth'}); });
-
-        // --- Active Nav Link on Scroll ---
-        const sections = document.querySelectorAll('section[id], header[id]');
-        const navLinks = document.querySelectorAll('.nav-link');
-        const navObserver = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    const id = entry.target.getAttribute('id');
-                    navLinks.forEach(link => {
-                        link.classList.remove('active-link');
-                        if (link.getAttribute('href') === `#${id}`) {
-                            link.classList.add('active-link');
-                        }
-                    });
-                }
-            });
-        }, { rootMargin: "-30% 0px -70% 0px" });
-        sections.forEach(section => { navObserver.observe(section); });
-        
-        // --- Mobile Menu Toggle ---
-        const mobileMenuButton = document.getElementById('mobile-menu-button');
-        const mobileNav = document.getElementById('mobile-nav');
-        mobileMenuButton.addEventListener('click', () => {
-            const isExpanded = mobileMenuButton.getAttribute('aria-expanded') === 'true';
-            mobileMenuButton.setAttribute('aria-expanded', !isExpanded);
-            mobileNav.style.display = isExpanded ? 'none' : 'block';
         });
-
-        // --- Smooth scrolling & mobile menu close ---
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                if (this.getAttribute('href') !== '#') {
-                    e.preventDefault();
-                    document.querySelector(this.getAttribute('href')).scrollIntoView({ behavior: 'smooth' });
-                }
-                if (mobileNav.style.display === 'block') { mobileMenuButton.click(); }
-            });
-        });
-
-        // --- Reveal on Scroll ---
-        const revealElements = document.querySelectorAll('.reveal');
-        const revealObserver = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('reveal-active');
-                }
-            });
-        }, { threshold: 0.1 });
-        revealElements.forEach(el => { revealObserver.observe(el); });
     </script>
 </body>
 </html>

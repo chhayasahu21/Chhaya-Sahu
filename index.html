@@ -14,6 +14,35 @@
             font-family: 'Poppins', sans-serif;
         }
         
+        /* --- Scroll Progress Bar --- */
+        #scroll-progress {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 0%;
+            height: 4px;
+            background: linear-gradient(90deg, #2563eb, #9333ea);
+            z-index: 100;
+            transition: width 0.1s ease-out;
+        }
+
+        /* --- Skills Marquee Animation --- */
+        .marquee-container {
+            mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+            -webkit-mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+        }
+        .animate-marquee {
+            display: inline-flex;
+            animation: marquee 25s linear infinite;
+        }
+        .animate-marquee:hover {
+            animation-play-state: paused;
+        }
+        @keyframes marquee {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+
         /* --- Moving Gradient Text Animation --- */
         .animate-gradient-text {
             background-size: 200% auto;
@@ -42,7 +71,7 @@
             100% { transform: translate(0, 0) rotate(0deg) scale(1); border-radius: 30% 60% 70% 40% / 50% 60% 30% 60%; }
         }
 
-        /* --- NEW: Profile Running Animation (Spinning Glow) --- */
+        /* --- Profile Running Animation (Spinning Glow) --- */
         .profile-glow {
             position: absolute;
             inset: -8px;
@@ -73,11 +102,14 @@
         /* --- Premium Card Hover Effects --- */
         .hover-card-base {
             transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            background: rgba(255, 255, 255, 0.9); /* Glassmorphism start */
+            backdrop-filter: blur(10px);
         }
         .hover-card-base:hover {
             transform: translateY(-7px);
             box-shadow: 0 15px 35px rgba(37, 99, 235, 0.15); 
             border-color: #bfdbfe !important; 
+            background: white;
         }
 
         /* Print Specific Styles */
@@ -88,7 +120,7 @@
                 color: black; 
                 font-size: 12px;
             }
-            .no-print, nav, .blob, #contact, footer, .print-hidden, [data-aos], .profile-glow { 
+            .no-print, nav, .blob, #contact, footer, .print-hidden, [data-aos], .profile-glow, #scroll-progress { 
                 display: none !important; 
                 opacity: 1 !important;
                 transform: none !important;
@@ -102,6 +134,24 @@
             }
             .no-print { display: none !important; }
             .md\:hidden { display: none !important; }
+
+            /* Marquee Fix for Print */
+            .marquee-container {
+                mask-image: none !important;
+                -webkit-mask-image: none !important;
+                overflow: visible !important;
+            }
+            .animate-marquee {
+                animation: none !important;
+                display: flex !important;
+                flex-wrap: wrap !important;
+                gap: 0.5rem !important;
+                white-space: normal !important;
+            }
+            /* Hide duplicated items in print */
+            .marquee-duplicate {
+                display: none !important;
+            }
 
             section { 
                 padding-top: 10px !important; 
@@ -130,6 +180,9 @@
     </style>
 </head>
 <body class="bg-slate-50 text-slate-800 antialiased relative overflow-x-hidden">
+
+    <!-- Scroll Progress Bar -->
+    <div id="scroll-progress"></div>
 
     <!-- Decorative Background Elements -->
     <div class="blob blob-1 bg-purple-300 w-72 h-72 rounded-full top-0 left-0 -translate-x-1/2 -translate-y-1/2 no-print"></div>
@@ -196,7 +249,6 @@
                     <a href="#contact" class="px-8 py-3 bg-blue-600 text-white rounded-full text-base font-medium hover:bg-blue-700 transition-all duration-300 shadow-lg hover:shadow-blue-500/40 transform hover:-translate-y-1 active:scale-95">
                         Contact Me
                     </a>
-                    <!-- PRINT FUNCTION BUTTON REMOVED AS PER REQUEST -->
                 </div>
             </div>
             
@@ -205,20 +257,16 @@
                 <!-- Wrapper for the profile and its animations -->
                 <div class="relative w-40 h-40 md:w-56 md:h-56 group cursor-pointer">
                     
-                    <!-- NEW: Running Animation Background (Spinning Glow) -->
+                    <!-- Running Animation Background (Spinning Glow) -->
                     <div class="profile-glow"></div>
                     
                     <!-- Inner Container with Border -->
                     <div class="relative w-full h-full bg-white rounded-full flex items-center justify-center overflow-hidden ring-4 ring-white shadow-xl transition-all duration-500 hover:scale-105">
-                         <!-- 
-                            GITHUB/LOCAL SETUP:
-                            This looks for "chhaya.jpg" in the same folder as this index.html file.
-                            Ensure your file is named exactly "chhaya.jpg".
-                         -->
-                         <img src="chhaya.jpg" alt="Chhaya Sahu" class="w-full h-full object-cover transition duration-700 group-hover:rotate-2" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
-                         
-                         <!-- Fallback: Shows "CS" if image is missing -->
-                         <span class="text-6xl font-bold text-blue-200 hidden group-hover:text-blue-500 transition duration-500">CS</span>
+                         <!-- Smart Image Loading -->
+                         <img src="chhaya.jpg" 
+                              alt="Chhaya Sahu" 
+                              class="w-full h-full object-cover transition duration-700 group-hover:rotate-2" 
+                              onerror="this.onerror=null; this.src='data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjM2I4MmY2IiBzdHJva2Utd2lkdGg9IjEuNSIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIj48cGF0aCBkPSJNMTIgMmE1IDUgMCAxIDAgMCAxMCA1IDUgMCAwIDAgMC0xMHoiLz48cGF0aCBkPSJNMTIgMTRhOSA5IDAgMCAwLTkgOWgxOGE5IDkgMCAwIDAtOS05eiIvPjwvc3ZnPg==';">
                     </div>
                 </div>
             </div>
@@ -229,7 +277,7 @@
     <div class="max-w-6xl mx-auto px-4 print-grid-2">
         
         <!-- Experience Section -->
-        <section id="experience" class="py-8 bg-white rounded-xl mb-4 md:mb-0 transition-colors">
+        <section id="experience" class="py-8 bg-white/50 backdrop-blur-sm rounded-xl mb-4 md:mb-0 transition-colors">
             <h2 class="text-xl md:text-2xl font-bold mb-6 text-slate-900 border-b pb-2 border-slate-200" data-aos="fade-right">
                 <i class="fas fa-briefcase text-blue-500 mr-2 text-lg"></i>Work Experience
             </h2>
@@ -265,7 +313,7 @@
         </section>
 
         <!-- Education Section -->
-        <section id="education" class="py-8 bg-slate-50 rounded-xl" data-aos="fade-up">
+        <section id="education" class="py-8 bg-slate-50/50 backdrop-blur-sm rounded-xl" data-aos="fade-up">
             <h2 class="text-xl md:text-2xl font-bold mb-6 text-slate-900 border-b pb-2 border-slate-200">
                 <i class="fas fa-graduation-cap text-purple-500 mr-2 text-lg"></i>Education
             </h2>
@@ -335,37 +383,51 @@
     </div>
 
     <!-- Skills & Languages Section -->
-    <section id="skills" class="py-8 bg-white">
+    <section id="skills" class="py-8 bg-white/50 backdrop-blur-sm">
         <div class="max-w-6xl mx-auto px-4">
             <div class="grid md:grid-cols-2 gap-8">
-                <!-- Skills -->
+                <!-- Skills Marquee Section -->
                 <div data-aos="fade-right">
                     <h3 class="text-xl font-bold mb-4 text-slate-900 flex items-center gap-2 border-b pb-2 border-slate-200">
                         <i class="fas fa-layer-group text-blue-600 animate-pulse"></i> Professional Skills
                     </h3>
-                    <div class="flex flex-wrap gap-2">
-                        <span class="px-3 py-1 bg-slate-100 text-slate-700 rounded text-xs font-medium border border-slate-200 hover:bg-blue-50 hover:text-blue-600 hover:border-blue-200 transition-all cursor-default transform hover:scale-105 duration-300 hover:shadow-sm">Effective Communication</span>
-                        <span class="px-3 py-1 bg-slate-100 text-slate-700 rounded text-xs font-medium border border-slate-200 hover:bg-blue-50 hover:text-blue-600 hover:border-blue-200 transition-all cursor-default transform hover:scale-105 duration-300 hover:shadow-sm">Logical Reasoning</span>
-                        <span class="px-3 py-1 bg-slate-100 text-slate-700 rounded text-xs font-medium border border-slate-200 hover:bg-blue-50 hover:text-blue-600 hover:border-blue-200 transition-all cursor-default transform hover:scale-105 duration-300 hover:shadow-sm">Goal Oriented</span>
-                        <span class="px-3 py-1 bg-slate-100 text-slate-700 rounded text-xs font-medium border border-slate-200 hover:bg-blue-50 hover:text-blue-600 hover:border-blue-200 transition-all cursor-default transform hover:scale-105 duration-300 hover:shadow-sm">Writing & Editing</span>
-                        <span class="px-3 py-1 bg-slate-100 text-slate-700 rounded text-xs font-medium border border-slate-200 hover:bg-blue-50 hover:text-blue-600 hover:border-blue-200 transition-all cursor-default transform hover:scale-105 duration-300 hover:shadow-sm">Data Analysis</span>
-                        <span class="px-3 py-1 bg-slate-100 text-slate-700 rounded text-xs font-medium border border-slate-200 hover:bg-blue-50 hover:text-blue-600 hover:border-blue-200 transition-all cursor-default transform hover:scale-105 duration-300 hover:shadow-sm">Business Admin</span>
-                        <span class="px-3 py-1 bg-slate-100 text-slate-700 rounded text-xs font-medium border border-slate-200 hover:bg-blue-50 hover:text-blue-600 hover:border-blue-200 transition-all cursor-default transform hover:scale-105 duration-300 hover:shadow-sm">Event Planning</span>
+                    
+                    <!-- New Marquee Implementation -->
+                    <div class="marquee-container overflow-hidden whitespace-nowrap py-2 relative">
+                        <div class="animate-marquee inline-flex gap-4">
+                            <!-- Skill Set 1 -->
+                            <span class="px-4 py-2 bg-white text-slate-700 rounded-full text-sm font-medium border border-blue-100 shadow-sm hover:border-blue-300 hover:text-blue-600 transition cursor-default">Effective Communication</span>
+                            <span class="px-4 py-2 bg-white text-slate-700 rounded-full text-sm font-medium border border-blue-100 shadow-sm hover:border-blue-300 hover:text-blue-600 transition cursor-default">Logical Reasoning</span>
+                            <span class="px-4 py-2 bg-white text-slate-700 rounded-full text-sm font-medium border border-blue-100 shadow-sm hover:border-blue-300 hover:text-blue-600 transition cursor-default">Goal Oriented</span>
+                            <span class="px-4 py-2 bg-white text-slate-700 rounded-full text-sm font-medium border border-blue-100 shadow-sm hover:border-blue-300 hover:text-blue-600 transition cursor-default">Writing & Editing</span>
+                            <span class="px-4 py-2 bg-white text-slate-700 rounded-full text-sm font-medium border border-blue-100 shadow-sm hover:border-blue-300 hover:text-blue-600 transition cursor-default">Data Analysis</span>
+                            <span class="px-4 py-2 bg-white text-slate-700 rounded-full text-sm font-medium border border-blue-100 shadow-sm hover:border-blue-300 hover:text-blue-600 transition cursor-default">Business Admin</span>
+                            <span class="px-4 py-2 bg-white text-slate-700 rounded-full text-sm font-medium border border-blue-100 shadow-sm hover:border-blue-300 hover:text-blue-600 transition cursor-default">Event Planning</span>
+                            
+                            <!-- Duplicate Skill Set for Loop (Hidden in Print) -->
+                            <span class="px-4 py-2 bg-white text-slate-700 rounded-full text-sm font-medium border border-blue-100 shadow-sm hover:border-blue-300 hover:text-blue-600 transition cursor-default marquee-duplicate">Effective Communication</span>
+                            <span class="px-4 py-2 bg-white text-slate-700 rounded-full text-sm font-medium border border-blue-100 shadow-sm hover:border-blue-300 hover:text-blue-600 transition cursor-default marquee-duplicate">Logical Reasoning</span>
+                            <span class="px-4 py-2 bg-white text-slate-700 rounded-full text-sm font-medium border border-blue-100 shadow-sm hover:border-blue-300 hover:text-blue-600 transition cursor-default marquee-duplicate">Goal Oriented</span>
+                            <span class="px-4 py-2 bg-white text-slate-700 rounded-full text-sm font-medium border border-blue-100 shadow-sm hover:border-blue-300 hover:text-blue-600 transition cursor-default marquee-duplicate">Writing & Editing</span>
+                            <span class="px-4 py-2 bg-white text-slate-700 rounded-full text-sm font-medium border border-blue-100 shadow-sm hover:border-blue-300 hover:text-blue-600 transition cursor-default marquee-duplicate">Data Analysis</span>
+                            <span class="px-4 py-2 bg-white text-slate-700 rounded-full text-sm font-medium border border-blue-100 shadow-sm hover:border-blue-300 hover:text-blue-600 transition cursor-default marquee-duplicate">Business Admin</span>
+                            <span class="px-4 py-2 bg-white text-slate-700 rounded-full text-sm font-medium border border-blue-100 shadow-sm hover:border-blue-300 hover:text-blue-600 transition cursor-default marquee-duplicate">Event Planning</span>
+                        </div>
                     </div>
 
-                    <h3 class="text-xl font-bold mt-6 mb-3 text-slate-900 flex items-center gap-2 border-b pb-2 border-slate-200" data-aos="fade-up">
+                    <h3 class="text-xl font-bold mt-8 mb-3 text-slate-900 flex items-center gap-2 border-b pb-2 border-slate-200" data-aos="fade-up">
                         <i class="fas fa-lightbulb text-yellow-500 animate-bounce"></i> Projects & Interests
                     </h3>
-                    <ul class="space-y-2 text-sm">
-                        <li class="flex items-start gap-2 hover:translate-x-2 transition-transform duration-300" data-aos="fade-up" data-aos-delay="100">
+                    <ul class="space-y-3 text-sm">
+                        <li class="flex items-start gap-3 p-3 bg-white rounded-lg shadow-sm hover:shadow-md transition-all duration-300 hover:-translate-y-1 border border-slate-100" data-aos="fade-up" data-aos-delay="100">
                             <i class="fas fa-check-circle text-green-500 mt-1 text-xs"></i>
                             <span class="text-slate-600"><strong>Project:</strong> How communication builds business</span>
                         </li>
-                        <li class="flex items-start gap-2 hover:translate-x-2 transition-transform duration-300" data-aos="fade-up" data-aos-delay="200">
+                        <li class="flex items-start gap-3 p-3 bg-white rounded-lg shadow-sm hover:shadow-md transition-all duration-300 hover:-translate-y-1 border border-slate-100" data-aos="fade-up" data-aos-delay="200">
                             <i class="fas fa-check-circle text-green-500 mt-1 text-xs"></i>
                             <span class="text-slate-600"><strong>Project:</strong> Psychology behind human behaviour</span>
                         </li>
-                        <li class="flex items-start gap-2 hover:translate-x-2 transition-transform duration-300" data-aos="fade-up" data-aos-delay="300">
+                        <li class="flex items-start gap-3 p-3 bg-white rounded-lg shadow-sm hover:shadow-md transition-all duration-300 hover:-translate-y-1 border border-slate-100" data-aos="fade-up" data-aos-delay="300">
                             <i class="fas fa-heart text-red-500 mt-1 text-xs"></i>
                             <span class="text-slate-600"><strong>Interests:</strong> Reading, Writing, Traveling, Cooking, Editing</span>
                         </li>
@@ -498,14 +560,23 @@
             });
         });
 
-        // Scroll to Top Button Visibility
+        // Scroll Progress & Scroll to Top Button Logic
         const scrollBtn = document.getElementById('scrollToTop');
+        const progressBar = document.getElementById('scroll-progress');
+        
         window.addEventListener('scroll', () => {
+            // Scroll Button Logic
             if (window.scrollY > 300) {
                 scrollBtn.classList.remove('translate-y-20', 'opacity-0');
             } else {
                 scrollBtn.classList.add('translate-y-20', 'opacity-0');
             }
+
+            // Progress Bar Logic
+            const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+            const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            const scrolled = (winScroll / height) * 100;
+            progressBar.style.width = scrolled + "%";
         });
     </script>
 </body>
